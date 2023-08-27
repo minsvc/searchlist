@@ -5,20 +5,28 @@ import PubSub from 'pubsub-js'
 
 export default class Search extends Component {
 
+
+    //获取点击事件执行搜索
     search = ()=> {
+
+        //多重析构赋值+重命名
         const {keyWordElement:{value:keyWord}} = this
 
         //this.props.updateAppState({isFirst:false, isLoading: true})
+
+        //更新状态
         PubSub.publish("mytopic", {isFirst:false, isLoading: true})
 
         axios.get(`https://api.github.com/search/users?q=${keyWord}`).then(
             response => {
                 //this.props.updateAppState({users:response.data.items, isLoading: false})
                 PubSub.publish("mytopic", {users:response.data.items, isLoading: false})
+                console.log(response)
             },
             error => {
                 //this.props.updateAppState({error:error, isLoading:false, users:[]})
-                PubSub.publish({error:error, isLoading:false, users:[]})
+                PubSub.publish("mytopic",{error:error, isLoading:false, users:[]})
+                console.log(error)
             }
         )      
     }

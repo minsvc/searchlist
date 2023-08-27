@@ -6,9 +6,9 @@ import PubSub from 'pubsub-js'
 export default class List extends Component {
 
     state ={
-        users:[],
-        isFirst:true,
-        isLoading:false,
+        users:[],    //用户信息
+        isFirst:true,       //是否初始状态，提示用户搜索
+        isLoading:false,    //搜索状态
         error:""
 
     }
