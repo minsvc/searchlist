@@ -13,12 +13,15 @@ export default class List extends Component {
 
     }
 
+
+    //页面加载完毕订阅消息，更新状态
     componentDidMount(){
          this.token = PubSub.subscribe('mytopic', (_,stateObj)=>{
             this.setState(stateObj)
         })
     }
     
+    //卸载组件后取消订阅
     componentWillUnmount(){
         PubSub.unsubscribe(this.token)
     }
